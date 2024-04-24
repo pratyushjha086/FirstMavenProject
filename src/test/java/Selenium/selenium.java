@@ -10,6 +10,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -30,24 +31,33 @@ public class selenium {
          WebElement login = driver.findElement(By.xpath("//button[@type='submit']"));
          login.click();
          Thread.sleep(2000);
+	 }
+	 @Test
+	 void buzz() throws InterruptedException, IOException {
+		 
          WebElement buzz = driver.findElement(By.xpath("//a[@href='/web/index.php/buzz/viewBuzz']"));
          buzz.click();
         Thread.sleep(1000);
         WebElement post = driver.findElement(By.xpath("//textarea[@class='oxd-buzz-post-input']"));
         post.sendKeys("Pratyush kumar");
+        Thread.sleep(1000);
         TakesScreenshot TS = (TakesScreenshot)driver;
         Thread.sleep(2000);
         File src = TS.getScreenshotAs(OutputType.FILE);
-        File DS = new File ("D:\\Out7.png");  
+        File DS = new File ("D:\\Out10.png");  
         Thread.sleep(2000);
         FileUtils.copyFile(src, DS);
         System.out.println("Screenshot is Captured");
-
-        
+        Thread.sleep(1000);
         WebElement po = driver.findElement(By.xpath("//button[@type='submit']"));
         po.click();
 
+	 }
+		
+	@AfterTest
+	void close() {
+		driver.quit();
 	}
-			
+	
 	
 }
